@@ -8,8 +8,10 @@ import springboot.corestudy.member.MemberServiceImpl;
 public class MemberApp {
 
     public static void main(String[] args) {
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
         //회원 가입 로직
-        MemberService memberService = new MemberServiceImpl();
+//        MemberService memberService = new MemberServiceImpl();
         Member member = new Member(1L, "memberA", Grade.VIP);//Long타입은 뒤에 L을 붙여야한다.
         memberService.join(member);
 

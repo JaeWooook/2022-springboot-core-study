@@ -11,8 +11,13 @@ import springboot.corestudy.order.OrderServiceImpl;
 public class OrderApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
+
+        AppConfig appConfig = new AppConfig();
+
+        MemberService memberService = appConfig.memberService(); // MemberServiceImpl 객체를 반환한다.
+        OrderService orderService = appConfig.orderService(); // OrderServiceImpl 객체를 반환한다.
+//        MemberService memberService = new MemberServiceImpl(null);
+//        OrderService orderService = new OrderServiceImpl(null, null);
 
         Long memberId = 1L;
         Member member  = new Member(memberId, "memberA", Grade.VIP);
