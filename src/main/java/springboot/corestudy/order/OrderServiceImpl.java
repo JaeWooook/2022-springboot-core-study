@@ -35,4 +35,9 @@ public class OrderServiceImpl implements OrderService{
     }
     //단일 체계의 원칙을 잘 지킨것이다 할인에 대한것은 discount에서만 처리하기 때문에
     //할인에 관련된것은 할인만 고치면 된다.
+
+    //테스트 용도
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
 }
