@@ -19,8 +19,8 @@ public class AppConfig {
     //위와같이 객체를 두번 호출하게되면 싱글톤이 깨질까 안깨질까?
 
     //call AppConfig.memberService
-    //all AppConfig.memberRepository
-    //all AppConfig.memberRepository
+    //call AppConfig.memberRepository
+    //call AppConfig.memberRepository
     //call AppConfig.orderService
     //call AppConfig.memberRepository
     
