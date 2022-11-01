@@ -1,5 +1,7 @@
 package springboot.corestudy.order;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import springboot.corestudy.discount.DiscountPolicy;
 import springboot.corestudy.discount.FixDiscountPolicy;
 import springboot.corestudy.discount.RateDiscountPolicy;
@@ -7,6 +9,7 @@ import springboot.corestudy.member.Member;
 import springboot.corestudy.member.MemberRepository;
 import springboot.corestudy.member.MemoryMemberRepository;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -21,6 +24,7 @@ public class OrderServiceImpl implements OrderService{
     // 스프링 컨테이너를 사용하는 이유
 
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
