@@ -19,12 +19,12 @@ public class OrderServiceImpl implements OrderService{
     //추상과 구체 두개 모두에 의존하고 있다. 결론적으로는 인터페이스에만 의존해야만 한다.
 //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // 이렇게 바꿔주면 끝이된다.
     //할인 정책의 객체를 바꿔주는것 이다.
-    private DiscountPolicy discountPolicy; //이렇게 하면 인터페이스에만 의존한다. 구체에 의존하지 않는다.
+    private final DiscountPolicy discountPolicy; //이렇게 하면 인터페이스에만 의존한다. 구체에 의존하지 않는다.
     // 이러한 문제를 해결하기 위해서는 OrderServiceImpl에 DiscountPolicy의 구현 객체를 대신 생성하고 주입해주어야 한다.
     // 스프링 컨테이너를 사용하는 이유
+//생성자 주입방식에서만 final 키워드를 사용할 수가 없다. 생성자주입을 사용해야 final 키워드를 사용할 수 있고, 컴파일오류로 잡아낼 수 있다.
+    //필드 주입을 하게되면 스프링컨테이너 없이는 테스트를 할 수 없고, 테스트에 용이하지 못하다.
 
-
-    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
