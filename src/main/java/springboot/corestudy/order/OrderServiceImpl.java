@@ -2,6 +2,7 @@ package springboot.corestudy.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import springboot.corestudy.discount.DiscountPolicy;
 import springboot.corestudy.discount.FixDiscountPolicy;
@@ -11,7 +12,7 @@ import springboot.corestudy.member.MemberRepository;
 import springboot.corestudy.member.MemoryMemberRepository;
 
 @Component
-@RequiredArgsConstructor //RequiredArgsConstructor는 파이널이 붙은 필드값을 이용해서 생성자를 만들어준다.
+//@RequiredArgsConstructor //RequiredArgsConstructor는 파이널이 붙은 필드값을 이용해서 생성자를 만들어준다.
 public class OrderServiceImpl implements OrderService{
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -27,10 +28,12 @@ public class OrderServiceImpl implements OrderService{
 //생성자 주입방식에서만 final 키워드를 사용할 수가 없다. 생성자주입을 사용해야 final 키워드를 사용할 수 있고, 컴파일오류로 잡아낼 수 있다.
     //필드 주입을 하게되면 스프링컨테이너 없이는 테스트를 할 수 없고, 테스트에 용이하지 못하다.
 
-//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//        this.memberRepository = memberRepository;
-//        this.discountPolicy = discountPolicy;
-//    }
+    //여러개를 조회했을 때 빈이름을 조회하기 때문에 정확한 빈이름으로 설정해주면 2개이상인 경우에도 해준다.
+    //타입이름으로 해놨기 때문에 2개가 조회되어 에러를 발생한다.
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
