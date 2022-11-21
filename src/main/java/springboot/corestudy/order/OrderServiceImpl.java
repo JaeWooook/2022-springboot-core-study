@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import springboot.corestudy.annotation.MainDiscountPolicy;
 import springboot.corestudy.discount.DiscountPolicy;
 import springboot.corestudy.discount.FixDiscountPolicy;
 import springboot.corestudy.discount.RateDiscountPolicy;
@@ -30,7 +31,7 @@ public class OrderServiceImpl implements OrderService{
 
     //여러개를 조회했을 때 빈이름을 조회하기 때문에 정확한 빈이름으로 설정해주면 2개이상인 경우에도 해준다.
     //타입이름으로 해놨기 때문에 2개가 조회되어 에러를 발생한다.
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
