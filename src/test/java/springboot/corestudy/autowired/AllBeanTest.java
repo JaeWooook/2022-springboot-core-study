@@ -43,7 +43,7 @@ public class AllBeanTest {
             System.out.println("policyMap = " + policyMap);
             System.out.println("policyList = "  + policies);
         }
-
+//맵을 이용해서 동적으로 빈을 설정할 수 있다.
         public int discount(Member member, int price, String discountCode) {//스프링 빈을 이용해서 다형성 코드를 개발할 수 있다.
             DiscountPolicy discountPolicy = policyMap.get(discountCode);
             return discountPolicy.discount(member, price);
