@@ -23,7 +23,8 @@ public class BeanLifeCycleTest {
         //스프링은 컨테이너가 종료되기 직전에 소멸 콜백을 준다.
         //스프링 빈의 이벤트 라이프사이클
         //스프링 컨테이너 생성 -> 스프링 빈 생성(생성자 주입은 여기서 주입) -> 의존관계 주입 -> 초기화 콜백 -> 사용 -> 소멸전 콜백 -> 스프링 종료
-        @Bean(initMethod = "init", destroyMethod = "close") //이렇게하면 스프링 빈이 스프링에만 의존하지 않는다. 코드를 고칠수 없는 외부라이브러리에도 초기화, 종료를 쓸 수 있다.
+//        @Bean(initMethod = "init", destroyMethod = "close") //이렇게하면 스프링 빈이 스프링에만 의존하지 않는다. 코드를 고칠수 없는 외부라이브러리에도 초기화, 종료를 쓸 수 있다.
+        @Bean
         public NetworkClient networkClient() {
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://hello-spring.dev");//당연하게 생성자에서 url을 넣어주지 않기 때문에 null이 나온다.
