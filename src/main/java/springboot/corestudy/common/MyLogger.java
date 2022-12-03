@@ -18,8 +18,9 @@ public class MyLogger {
         this.requestURL = requestURL;
     }
 
+    //서로 다른 uuid를 통해서 로그에서 다른 uuid임을 가지고 같은 uuid는 같은 http 요청임을 알 수 있다.
     public void log(String message) {
-        System.out.println("[" + uuid + "]" + "[" + requestURL + "]" + "[" + requestURL + "]" + message);
+        System.out.println("[" + uuid + "]" + "[" + requestURL + "]" + message);
     }
 
     @PostConstruct
