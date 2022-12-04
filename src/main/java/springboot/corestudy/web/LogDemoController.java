@@ -20,15 +20,18 @@ public class LogDemoController {
     private final LogDemoService logDemoService;
 //    private final MyLogger myLogger;
     //스프링 컨테이너가 시작할때 생성자로 주입하지 않고 찾을 수 있도록만 look up만 해주고, 실질적인 주입을할때 주입한다.
-    private final ObjectProvider<MyLogger> myLoggerProvider; //이렇게하면 마이로거를 찾지않고 DL 의존관계를 찾아준다.
+//    private final ObjectProvider<MyLogger> myLoggerProvider; //이렇게하면 마이로거를 찾지않고 DL 의존관계를 찾아준다.
     //주입 시점에 주입을 받을 수 있게 된다.
+    private final MyLogger myLogger;//프록시 모드를 사용한다.
 
     @RequestMapping("log-demo")
     @ResponseBody//문자를 그대로 보낼수가있다 화면이없어도
     public String logDemo(HttpServletRequest request) {
-        MyLogger myLogger = myLoggerProvider.getObject();//정말 필요한 시점에서 의존관계를 주입한다.
+//        MyLogger myLogger = myLoggerProvider.getObject();//정말 필요한 시점에서 의존관계를 주입한다.
         String requestURL = request.getRequestURL().toString();
-        myLogger.setRequestURL(requestURL);
+
+        System.out.println("myLogger = " + myLogger.getClass());//CGLIB$$ 내가만든 빈이 아니라 스프링빈이 만든 가짜 마이로그를 넣는것이다.
+        myLogger.setRequestURL(requestURL);//이때 진짜를 찾아서 동작한다 프로바이더가 동작한것과 비슷하다.
 
         myLogger.log("controller test");
         logDemoService.logic("testId");
